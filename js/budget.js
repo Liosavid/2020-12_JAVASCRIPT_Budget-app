@@ -25,8 +25,79 @@ const addExpense = document.querySelector(".add-expense");
 const expenseTitle = document.getElementById("expense-title-input");
 const expenseAmount = document.getElementById("expense-amount-input");
 
+// VARIABLES
 
-// TOGGLING FUNCTIONS
+let ENTRY_LIST = [];
+let balance = 0, income = 0, outcome = 0;
+
+const DELETE ="delete", EDIT = "edit";
+
+
+// TOGGGING: EVENT LISTENERS ON BUTTONS
+
+expenseBtn.addEventListener('click', function(){
+    show(expenseEl);
+    hide([incomeEl, allEl]);
+
+    active(expenseBtn);
+    inactive([incomeBtn, allBtn]);
+});
+
+incomeBtn.addEventListener('click', function(){
+    show(incomeEl);
+    hide([expenseEl, allEl]);
+
+    active(incomeBtn);
+    inactive([expenseBtn, allBtn]);
+});
+
+allBtn.addEventListener('click', function(){
+    show(allEl);
+    hide([incomeEl, expenseEl]);
+
+    active(allBtn);
+    inactive([expenseBtn, incomeBtn]);
+});
+
+
+addExpense.addEventListener("click", function(){
+    // If one of the inputs is empty => EXIT
+    if(!expenseTitle.value || !expenseAmount.value) return;
+
+    // Save the entry to ENTRY_LIST
+
+    let expense = {
+    type: "expense",
+    title: expenseTitle.value,
+    amount: parseFloat(expenseAmount.value)
+}
+
+ENTRY_LIST.push(expense);
+
+UpdateUI();
+clearInput([expenseTitle.value, expenseAmount.value])
+})
+
+addIncome.addEventListener("click", function(){
+    // If one of the inputs is empty => EXIT
+    if(!incomeTitle.value || !incomeAmount.value) return;
+
+    // Save the entry to ENTRY_LIST
+
+    let income = {
+    type: "income",
+    title: incomeTitle.value,
+    amount: parseFloat(incomeAmount.value)
+}
+
+ENTRY_LIST.push(income);
+
+UpdateUI();
+clearInput([icomeTitle.value, imcomeAmount.value])
+})
+
+
+// HELPERS: TOGGLING FUNCTIONS
 
 function active(element){
     element.classList.add("active");
@@ -34,7 +105,7 @@ function active(element){
 
 function inactive(elementsArray){
     elementsArray.forEach(element => {
-        element.classList.remove("hide");
+        element.classList.remove("active");
     });
 }
 
@@ -49,39 +120,16 @@ function hide(elementsArray){
 }
 
 
-// TOGGGING: EVENT LISTENERS ON BUTTONS
-
-expenseBtn.addEventListener('click', function(){
-    active(expenseBtn);
-    inactive([incomeBtn, allBtn]);
-    show(expenseEl);
-    hide([incomeEl, allEl]);
-});
-
-incomeBtn.addEventListener('click', function(){
-    active(incomeBtn);
-    inactive([expenseBtn, allBtn]);
-    show(incomeEl);
-    hide([expenseEl, allEl]);
-});
-
-allBtn.addEventListener('click', function(){
-    active(allBtn);
-    inactive([expenseBtn, incomeBtn]);
-    show(allEl);
-    hide([incomeEl, expenseEl]);
-});
-
 
 // ADD ENTRY: DEFINE VARIABLES
 
-let ENTRY_LIST = [];
-
-let income = {
+/* let income = {
     type: "income",
     title: incomeTitle.value,
     amount: parseFloat(incomeAmount.value)
 }
+
+
 
 ENTRY_LIST.push(income);
 updateUI();
@@ -94,3 +142,4 @@ addIncome.addEvenListener("click", function(){
 
 });
 
+*/
