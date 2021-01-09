@@ -53,10 +53,10 @@ input[type=number] {
     margin-left: 20px;
 }
 
-.budget-container .app-title a{
+.budget-container .app-title{
     color: #FFF;
 }
-.budget-container .app-title a b{
+.budget-container .app-title b{
     font-family: 'Gilroy Bold';
 }
 
